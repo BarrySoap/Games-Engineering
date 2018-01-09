@@ -143,6 +143,24 @@ void Update(RenderWindow &window)
 		// Bounce off left paddle
 		ballVelocity *= -1.1f;
 	}
+
+	// Check paddle collision
+	if (paddles[0].getPosition().y + paddleSize.y / 2 > gameHeight) 
+	{
+		paddles[0].setPosition(paddles[0].getPosition().x, gameHeight - paddleSize.y / 2);
+	}
+	else if (paddles[0].getPosition().y - paddleSize.y / 2 < 0) 
+	{
+		paddles[0].setPosition(paddles[0].getPosition().x, 0 + paddleSize.y / 2);
+	}
+	else if (paddles[1].getPosition().y + paddleSize.y / 2 > gameHeight) 
+	{
+		paddles[1].setPosition(paddles[1].getPosition().x, gameHeight - paddleSize.y / 2);
+	}
+	else if (paddles[1].getPosition().y - paddleSize.y / 2 < 0)
+	{
+		paddles[1].setPosition(paddles[1].getPosition().x, 0 + paddleSize.y / 2);
+	}
 }
 
 void Render(RenderWindow &window)
