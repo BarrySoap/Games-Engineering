@@ -30,9 +30,9 @@ void Load() {
 	ball.setOrigin(ballRadius / 2, ballRadius / 2);
 	// Reset paddle position
 	paddles[0].setPosition(10 + paddleSize.x / 2, gameHeight / 2);
-	//paddles[1].setPosition(...);
+	paddles[1].setPosition(gameWidth - (10 + paddleSize.x / 2), gameHeight / 2);
 	// Reset ball position
-	//ball.setPosition(...);
+	ball.setPosition(gameWidth / 2, gameHeight / 2);
 }
 
 void Update(RenderWindow &window) {
@@ -62,4 +62,23 @@ void Update(RenderWindow &window) {
 		direction++;
 	}
 	paddles[0].move(0, direction * paddleSpeed * dt);
+}
+
+void Render(RenderWindow &window) {
+	// Draw everything
+	window.draw(paddles[0]);
+	window.draw(paddles[1]);
+	window.draw(ball);
+}
+
+int main() {
+	RenderWindow window(VideoMode(gameWidth, gameHeight), "PONG");
+	Load();
+	while (window.isOpen()) {
+		window.clear();
+		Update(window);
+		Render(window);
+		window.display();
+	}
+	return 0;
 }
