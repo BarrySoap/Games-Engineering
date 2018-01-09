@@ -22,6 +22,9 @@ bool server = false;
 CircleShape ball;							// Ball object
 RectangleShape paddles[2];					// Container for paddles
 
+Font font;
+Text text;
+
 void reset()
 {
 	// Reset paddle position
@@ -29,6 +32,11 @@ void reset()
 	paddles[1].setPosition(gameWidth - (10 + paddleSize.x / 2), gameHeight / 2);
 	// Reset ball position
 	ball.setPosition(gameWidth / 2, gameHeight / 2);
+
+	// Update Score Text
+	text.setString("0");
+	// Keep Score Text Centred
+	text.setPosition((gameWidth * 0.5f) - (text.getLocalBounds().width * 0.5f), 0);
 }
 
 void Load()
@@ -47,6 +55,12 @@ void Load()
 	// Set ball velocity
 	// If server = true, vel = -100.0f, if false, vel = 60.0f
 	ballVelocity = { server ? 100.0f : -100.0f, 60.0f };
+	// Load score fonts
+	font.loadFromFile("res/fonts/RobotoMono-Regular.ttf");
+	// Set text element to use font
+	text.setFont(font);
+	// Set the character size to 24 pixels
+	text.setCharacterSize(24);
 }
 
 void Update(RenderWindow &window)
