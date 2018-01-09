@@ -161,6 +161,9 @@ void Update(RenderWindow &window)
 	{
 		paddles[1].setPosition(paddles[1].getPosition().x, 0 + paddleSize.y / 2);
 	}
+
+	// Basic AI
+	paddles[1].setPosition(paddles[1].getPosition().x, ball.getPosition().y);
 }
 
 void Render(RenderWindow &window)
