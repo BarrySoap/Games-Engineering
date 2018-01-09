@@ -22,7 +22,7 @@ bool server = false;
 CircleShape ball;							// Ball object
 RectangleShape paddles[2];					// Container for paddles
 
-void reset() 
+void reset()
 {
 	// Reset paddle position
 	paddles[0].setPosition(10 + paddleSize.x / 2, gameHeight / 2);
@@ -72,47 +72,57 @@ void Update(RenderWindow &window)
 	}
 
 	// Handle paddle movement
-	float direction = 0.0f;
+	float leftDirection = 0.0f;
+	float rightDirection = 0.0f;
 	if (Keyboard::isKeyPressed(controls[0]))
 	{
-		direction--;
+		leftDirection--;
 	}
 	if (Keyboard::isKeyPressed(controls[1]))
 	{
-		direction++;
+		leftDirection++;
 	}
-	paddles[0].move(0, direction * paddleSpeed * dt);
+	if (Keyboard::isKeyPressed(controls[2]))
+	{
+		rightDirection--;
+	}
+	if (Keyboard::isKeyPressed(controls[3]))
+	{
+		rightDirection++;
+	}
+	paddles[0].move(0, leftDirection * paddleSpeed * dt);
+	paddles[1].move(0, rightDirection * paddleSpeed * dt);
 	ball.move(ballVelocity * dt);
 
 	// Check ball collision
 	const float bx = ball.getPosition().x;		// Ball x position
 	const float by = ball.getPosition().y;		// Ball y position
-	if (by > gameHeight) 
+	if (by > gameHeight)
 	{
 		// Bottom wall
 		ballVelocity.x *= 1.1f;
 		ballVelocity.y *= -1.1f;
 		ball.move(0, -10);
 	}
-	else if (by < 0) 
+	else if (by < 0)
 	{
 		// Top wall
 		ballVelocity.x *= 1.1f;
 		ballVelocity.y *= -1.1f;
 		ball.move(0, 10);
 	}
-	else if (bx > gameWidth) 
+	else if (bx > gameWidth)
 	{
 		// Right wall
 		reset();
 	}
-	else if (bx < 0) 
+	else if (bx < 0)
 	{
 		// Left wall
 		reset();
 	}
 	else if (
-		// Ball is inline or behind paddle
+		// Ball is inline or behind left paddle
 		bx < paddleSize.x &&
 		// AND ball is below top edge of paddle
 		by > paddles[0].getPosition().y - (paddleSize.y * 0.5) &&
@@ -122,17 +132,17 @@ void Update(RenderWindow &window)
 		// Bounce off left paddle
 		ballVelocity *= -1.1f;
 	}
-	//else if (
-	//	// Ball is inline or behind paddle
-	//	bx > paddleSize.x &&
-	//	// AND ball is below top edge of paddle
-	//	by > paddles[1].getPosition().y - (paddleSize.y * 0.5) &&
-	//	// AND ball is above bottom edge of paddle
-	//	by < paddles[1].getPosition().y + (paddleSize.y * 0.5)
-	//) {
-	//	// Bounce off left paddle
-	//	ballVelocity *= -1.1f;
-	//}
+	else if (
+		// Ball is inline or right behind paddle
+		bx > paddles[1].getPosition().x - (paddleSize.x * 0.5) &&
+		// AND ball is below top edge of paddle
+		by > paddles[1].getPosition().y - (paddleSize.y * 0.5) &&
+		// AND ball is above bottom edge of paddle
+		by < paddles[1].getPosition().y + (paddleSize.y * 0.5)
+		) {
+		// Bounce off left paddle
+		ballVelocity *= -1.1f;
+	}
 }
 
 void Render(RenderWindow &window)
