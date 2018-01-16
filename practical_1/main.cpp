@@ -186,6 +186,7 @@ void Render(RenderWindow &window)
 	window.draw(paddles[0]);
 	window.draw(paddles[1]);
 	window.draw(ball);
+	window.draw(text);
 }
 
 int main()
