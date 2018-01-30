@@ -15,13 +15,8 @@ Ship::Ship(IntRect ir) : Sprite() {
 void Ship::Update(const float &dt) {}
 
 Ship::~Ship() = default;
-
-class Invader : public Ship {
-public:
-	Invader(sf::IntRect ir, sf::Vector2f pos);
-	Invader();
-	void Update(const float &dt) override;
-};
+bool Invader::direction;
+float Invader::speed;
 
 Invader::Invader() : Ship() {}
 
@@ -32,4 +27,16 @@ Invader::Invader(sf::IntRect ir, sf::Vector2f pos) : Ship(ir) {
 
 void Invader::Update(const float &dt) {
 	Ship::Update(dt);
+
+	move(dt * (direction ? 1.0f : -1.0f) * speed, 0);
+
+	if ((direction && getPosition().x > gameWidth - 16) ||
+		!direction && getPosition().x < 16) {
+		direction = !direction;
+
+		for (int i = 0; i < ships.size(); i++) {
+			ships[i]->move(0, 24);
+		}
+	}
 }
+

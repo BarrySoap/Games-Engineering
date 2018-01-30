@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -24,6 +25,27 @@ RectangleShape paddles[2];					// Container for paddles
 
 Font font;
 Text text;
+
+float quadOne = 0 + rand() % ((gameHeight / 4 + 1) - 0);
+float quadTwo = (gameHeight / 4) + rand() % ((gameHeight / 2 + 1) - (gameHeight / 4));
+float quadThree = (gameHeight / 2) + rand() % (((gameHeight * 3) / 4) + 1) - (gameHeight / 2);
+float quadFour = ((gameHeight * 3) / 4) + rand() % ((gameHeight + 1) - ((gameHeight * 3) / 4));
+
+void runAI() 
+{
+	if (ball.getPosition().y > 0 && ball.getPosition().y < (gameHeight / 4)) {
+		paddles[1].setPosition(paddles[1].getPosition().x, quadOne);
+	}
+	if (ball.getPosition().y > (gameHeight / 4) && ball.getPosition().y < (gameHeight / 2)) {
+		paddles[1].setPosition(paddles[1].getPosition().x, quadTwo);
+	}
+	if (ball.getPosition().y > (gameHeight / 2) && ball.getPosition().y < ((gameHeight * 3) / 4)) {
+		paddles[1].setPosition(paddles[1].getPosition().x, quadThree);
+	}
+	if (ball.getPosition().y > ((gameHeight * 3) / 4) && ball.getPosition().y < gameHeight) {
+		paddles[1].setPosition(paddles[1].getPosition().x, quadFour);
+	}
+}
 
 void reset()
 {
@@ -176,8 +198,7 @@ void Update(RenderWindow &window)
 		paddles[1].setPosition(paddles[1].getPosition().x, 0 + paddleSize.y / 2);
 	}
 
-	// Basic AI
-	paddles[1].setPosition(paddles[1].getPosition().x, ball.getPosition().y);
+	runAI();
 }
 
 void Render(RenderWindow &window)
