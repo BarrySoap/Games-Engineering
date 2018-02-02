@@ -9,3 +9,6 @@ constexpr uint16_t invaders_columns = 12;
 
 extern sf::Texture spritesheet;
 extern std::vector<Ship *> ships;
+extern Ship* player;
+
+const float shipSpeed = 200.0f;

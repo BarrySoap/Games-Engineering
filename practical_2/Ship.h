@@ -4,14 +4,17 @@
 class Ship : public sf::Sprite {
 protected:
 	sf::IntRect _sprite;
+	bool _exploded;
+	float explosionTime = 0.3f;
 	Ship();
 public:
+	bool is_exploded() const;
 
 	explicit Ship(sf::IntRect ir);
-
 	virtual ~Ship() = 0;
 
 	virtual void Update(const float &dt);
+	virtual void Explode();
 };
 
 class Invader : public Ship {
@@ -22,4 +25,11 @@ public:
 	static float speed;
 
 	virtual void Update(const float &dt);
+	void Explode();
+};
+
+class Player : public Ship {
+public:
+	Player();
+	void Update(const float &dt) override;
 };
