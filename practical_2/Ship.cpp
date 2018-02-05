@@ -104,15 +104,16 @@ void Player::Update(const float &dt) {
 	if (firetime <= 0 && Keyboard::isKeyPressed(Keyboard::Space)) 
 	{
 		bullets.push_back(new Bullet(getPosition(), false));
-	}
-
-	if (firetime <= 0 && Keyboard::isKeyPressed(Keyboard::Space)) {
 		Bullet::Fire(getPosition(), false);
-		firetime = 0.5f;
+		firetime = 0.7f;
 	}
 
 	for (const auto s : bullets)
 	{
 		s->Update(dt);
 	}
+	//std::cout << player->getPosition().x << "      " << player->getPosition().y << std::flush;
+	//std::cout << player->is_exploded() << std::flush;
+	std::cout << "\r" << player->getPosition().x << " " << player->getPosition().y << std::flush;
+
 }

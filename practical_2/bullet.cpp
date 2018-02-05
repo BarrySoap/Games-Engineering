@@ -1,5 +1,6 @@
 #include "bullet.h"
 #include "game.h"
+#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -70,10 +71,12 @@ void Bullet::Render(sf::RenderWindow & window)
 
 void Bullet::Fire(const sf::Vector2f & pos, const bool mode)
 {
-	bullets[bulletPointer++].setPosition(pos);
+	bulletPointer++;
+	bullets[bulletPointer].setPosition(pos);
 	bullets[bulletPointer]._mode = mode;
 
 	if (mode) {
+		bullets[bulletPointer].setPosition(bullets[bulletPointer].getPosition() - Vector2f(0, 32));
 		bullets[bulletPointer].setTextureRect(IntRect(32, 32, 32, 32));
 	}
 	else {

@@ -90,5 +90,6 @@ int main() {
 		Render(window);
 		window.display();
 	}
+
 	return 0;
 }
