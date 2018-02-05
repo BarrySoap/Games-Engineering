@@ -112,8 +112,4 @@ void Player::Update(const float &dt) {
 	{
 		s->Update(dt);
 	}
-	//std::cout << player->getPosition().x << "      " << player->getPosition().y << std::flush;
-	//std::cout << player->is_exploded() << std::flush;
-	std::cout << "\r" << player->getPosition().x << " " << player->getPosition().y << std::flush;
-
 }

@@ -16,13 +16,13 @@ add_subdirectory("lib/sfml")
 set(SFML_INCS "lib/sfml/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 
-### Practical 1 ###
+### Pong - Practical 1 ###
 file(GLOB_RECURSE SOURCES practical_1/*.cpp practical_1/*.h)
 add_executable(PRACTICAL_1 ${SOURCES})
 target_include_directories(PRACTICAL_1 PRIVATE ${SFML_INCS})
 target_link_libraries(PRACTICAL_1 sfml-graphics)
 
-## Space invaders
+## Space invaders - Practical 2 ###
 file(GLOB_RECURSE SOURCES practical_2/*.cpp practical_2/*.h)
 add_executable(PRACTICAL_2_INVADERS ${SOURCES})
 target_include_directories(PRACTICAL_2_INVADERS SYSTEM PRIVATE ${SFML_INCS})
@@ -35,3 +35,9 @@ add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND}
 )
 
 add_dependencies(PRACTICAL_2_INVADERS copy_resources)
+
+### Tile Maze - Practical 3 ###
+file(GLOB_RECURSE SOURCES practical_3/*.cpp practical_3/*.h)
+add_executable(PRACTICAL_3 ${SOURCES})
+target_include_directories(PRACTICAL_3 PRIVATE ${SFML_INCS})
+target_link_libraries(PRACTICAL_3 sfml-graphics)

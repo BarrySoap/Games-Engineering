@@ -13,12 +13,6 @@ sf::Sprite invader;
 Ship* player;
 std::vector<Ship *> ships;
 
-void Reset()
-{
-	Invader::direction = true;
-	Invader::speed = 30.f;
-}
-
 void Load() {
 	if (!spritesheet.loadFromFile("res/img/invaders_sheet.png")) {
 		cerr << "Failed to load spritesheet!" << std::endl;
@@ -45,7 +39,8 @@ void Load() {
 	playerOne->shipType = true;
 	ships.push_back(playerOne);
 
-	Reset();
+	Invader::direction = true;
+	Invader::speed = 30.0f;
 }
 
 void Update(RenderWindow &window) {
