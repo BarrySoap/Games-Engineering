@@ -34,7 +34,7 @@ void Render(RenderWindow &window) {
 }
 
 int main() {
-	RenderWindow window(VideoMode(gameWidth, gameHeight), "Space Invaders");
+	RenderWindow window(VideoMode(gameWidth, gameHeight), "Tile Maze");
 	Load();
 	while (window.isOpen()) {
 		window.clear();
