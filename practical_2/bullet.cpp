@@ -4,6 +4,9 @@
 using namespace sf;
 using namespace std;
 
+unsigned char Bullet::bulletPointer = 0;		// Fixes linking errors??
+Bullet Bullet::bullets[256];
+
 Bullet::Bullet(const sf::Vector2f & pos, const bool mode) {
 	_mode = mode;
 	setPosition(pos);
@@ -76,9 +79,4 @@ void Bullet::Fire(const sf::Vector2f & pos, const bool mode)
 	else {
 		bullets[bulletPointer].setTextureRect(IntRect(64, 32, 32, 32));
 	}
-}
-
-void Ship::Explode() {
-	setTextureRect(IntRect(128, 32, 32, 32));
-	_exploded = true;
 }

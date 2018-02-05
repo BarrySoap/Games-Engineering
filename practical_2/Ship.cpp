@@ -87,13 +87,13 @@ void Player::Update(const float &dt) {
 	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
 		direction--;
-		Ship::move(0, direction * shipSpeed * dt);
+		Ship::move(direction * shipSpeed * dt, 0);
 	}
 	// Move right
 	if (Keyboard::isKeyPressed(Keyboard::D))
 	{
 		direction++;
-		Ship::move(0, direction * shipSpeed * dt);
+		Ship::move(direction * shipSpeed * dt, 0);
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Space)) 
