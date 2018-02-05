@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Ship.h"
 #include "game.h"
 #include "bullet.h"
@@ -60,8 +61,12 @@ void Invader::Update(const float &dt) {
 		!direction && getPosition().x < 16) {
 		direction = !direction;
 
-		for (int i = 0; i < ships.size(); i++) {
-			ships[i]->move(0, 24);
+		for (int i = 0; i < ships.size(); i++) 
+		{
+			if (ships[i]->shipType == false) 
+			{
+				ships[i]->move(0, 24);
+			}
 		}
 	}
 
@@ -96,18 +101,18 @@ void Player::Update(const float &dt) {
 		Ship::move(direction * shipSpeed * dt, 0);
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Space)) 
+	if (firetime <= 0 && Keyboard::isKeyPressed(Keyboard::Space)) 
 	{
 		bullets.push_back(new Bullet(getPosition(), false));
 	}
 
-	for (const auto s : bullets) 
-	{
-		s->Update(dt);
-	}
-
 	if (firetime <= 0 && Keyboard::isKeyPressed(Keyboard::Space)) {
 		Bullet::Fire(getPosition(), false);
-		firetime = 0.7f;
+		firetime = 0.5f;
+	}
+
+	for (const auto s : bullets)
+	{
+		s->Update(dt);
 	}
 }

@@ -9,6 +9,7 @@ protected:
 	Ship();
 public:
 	bool is_exploded() const;
+	bool shipType;
 
 	explicit Ship(sf::IntRect ir);
 	virtual ~Ship() = 0;
