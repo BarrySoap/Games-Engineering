@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include "player.h"
+#include "entity.h"
 
 using namespace sf;
 using namespace std;
@@ -6,8 +8,11 @@ using namespace std;
 const int gameWidth = 800;					// Screen Width
 const int gameHeight = 600;					// Screen Height
 
-void Load() {
+Player* player = new Player();
 
+void Load() {
+	Vector2f pos(gameWidth / 2, gameHeight / 2);
+	player->setPosition(pos);
 }
 
 void Update(RenderWindow &window) {
@@ -27,10 +32,12 @@ void Update(RenderWindow &window) {
 	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
 		window.close();
 	}
+
+	player->update(dt);
 }
 
 void Render(RenderWindow &window) {
-
+	player->render(window);
 }
 
 int main() {
