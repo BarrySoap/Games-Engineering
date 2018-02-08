@@ -55,7 +55,7 @@ void Bullet::_Update(const float &dt) {
 	}
 };
 
-void Bullet::Update(const float & dt)
+void Bullet::Update(const float &dt)
 {
 	for (auto &b : bullets) {
 		b._Update(dt);
