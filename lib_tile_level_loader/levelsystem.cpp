@@ -27,6 +27,19 @@ void LevelSystem::setColor(LevelSystem::TILE t, sf::Color c) {
 	// ?
 }
 
+void LevelSystem::buildSprites() {
+	_sprites.clear();
+	for (size_t y = 0; y < LevelSystem::getHeight(); ++y) {
+		for (size_t x = 0; x < LevelSystem::getWidth(); ++x) {
+			auto s = make_unique<sf::RectangleShape>();
+			s->setPosition(getTilePosition({ x, y }));
+			s->setSize(Vector2f(_tileSize, _tileSize));
+			s->setFillColor(getColor(getTile({ x, y })));
+			_sprites.push_back(move(s));
+		}
+	}
+}
+
 void LevelSystem::loadLevelFile(const std::string &path, float tileSize) {
 	_tileSize = tileSize;
 	size_t w = 0, h = 0;
@@ -81,9 +94,13 @@ void LevelSystem::loadLevelFile(const std::string &path, float tileSize) {
 		throw string("Can't parse level file") + path;
 	}
 	_tiles = std::make_unique<TILE[]>(w * h);
-	_width = w;	// Set static class vars
+	_width = w;				// Set static class vars
 	_height = h;
 	std::copy(temp_tiles.begin(), temp_tiles.end(), &_tiles[0]);
 	cout << "Level " << path << " Loaded. " << w << "x" << h << std::endl;
 	buildSprites();
+}
+
+sf::Vector2f LevelSystem::getTilePosition(sf::Vector2ul p) {
+	return (Vector2f(p.x, p.y) * _tileSize);
 }
