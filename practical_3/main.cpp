@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
 #include "entity.h"
+#include "levelsystem.h"
+#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -11,6 +13,16 @@ const int gameHeight = 600;					// Screen Height
 Player* player = new Player();
 
 void Load() {
+	ls::loadLevelFile("res/maze_2.txt");
+
+	// Print the level to the console
+	for (size_t y = 0; y < ls::getHeight(); ++y) {
+		for (size_t x = 0; x < ls::getWidth(); ++x) {
+			std::cout << ls::getTile(Vector2f{ x, y });
+		}
+		std::cout << endl;
+	}
+
 	Vector2f pos(gameWidth / 2, gameHeight / 2);
 	player->setPosition(pos);
 }
@@ -37,6 +49,7 @@ void Update(RenderWindow &window) {
 }
 
 void Render(RenderWindow &window) {
+	ls::render(window);
 	player->render(window);
 }
 

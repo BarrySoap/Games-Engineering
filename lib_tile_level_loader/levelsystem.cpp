@@ -1,5 +1,6 @@
 #include "levelsystem.h"
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 using namespace sf;
@@ -25,6 +26,10 @@ sf::Color LevelSystem::getColor(LevelSystem::TILE t) {
 
 void LevelSystem::setColor(LevelSystem::TILE t, sf::Color c) {
 	// ?
+}
+
+sf::Vector2f LevelSystem::getTilePosition(sf::Vector2ul p) {
+	return (Vector2f(p.x, p.y) * _tileSize);
 }
 
 void LevelSystem::buildSprites() {
@@ -59,7 +64,7 @@ void LevelSystem::loadLevelFile(const std::string &path, float tileSize) {
 	}
 
 	std::vector<TILE> temp_tiles;
-	for (int i = 0; i < buffer.size(), ++i) {
+	for (int i = 0; i < buffer.size(); ++i) {
 		const char c = buffer[i];
 		switch (c) {
 		case 'w':
@@ -87,7 +92,7 @@ void LevelSystem::loadLevelFile(const std::string &path, float tileSize) {
 			h++;			// Increment height
 			break;
 		default:
-			cout << c << endl;	// Don't knoow what this tile type is
+			std::cout << c << endl;	// Don't know what this tile type is
 		}
 	}
 	if (temp_tiles.size() != (w * h)) {
@@ -97,10 +102,28 @@ void LevelSystem::loadLevelFile(const std::string &path, float tileSize) {
 	_width = w;				// Set static class vars
 	_height = h;
 	std::copy(temp_tiles.begin(), temp_tiles.end(), &_tiles[0]);
-	cout << "Level " << path << " Loaded. " << w << "x" << h << std::endl;
+	std::cout << "Level " << path << " Loaded. " << w << "x" << h << std::endl;
 	buildSprites();
 }
 
-sf::Vector2f LevelSystem::getTilePosition(sf::Vector2ul p) {
-	return (Vector2f(p.x, p.y) * _tileSize);
+LevelSystem::TILE LevelSystem::getTile(sf::Vector2u p) {
+	if (p.x > _width || p.y > _height) {
+		throw string("Tile out of range: ") + to_string(p.x) + "," +
+			to_string(p.y) + ")";
+	}
+	return _tiles[(p.y * _width) + p.x];
+}
+
+LevelSystem::TILE LevelSystem::getTileAt(Vector2f v) {
+	auto a = v - _offset;
+	if (a.x < 0 || a.y < 0) {
+		throw string("Tile out of range ");
+	}
+	return getTile(Vector2ul((v - _offset) / (_tileSize)));
+}
+
+void LevelSystem::render(RenderWindow &window) {
+	for (size_t i = 0; i < _width * _height; ++i) {
+		window.draw(*_sprites[i]);
+	}
 }
