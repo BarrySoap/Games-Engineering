@@ -12,13 +12,17 @@ const int gameHeight = 600;					// Screen Height
 
 Player* player = new Player();
 
+bool validmove(Vector2f pos) {
+	return (ls::getTileAt(pos) != ls::WALL);
+}
+
 void Load() {
 	ls::loadLevelFile("res/maze_2.txt");
 
 	// Print the level to the console
 	for (size_t y = 0; y < ls::getHeight(); ++y) {
 		for (size_t x = 0; x < ls::getWidth(); ++x) {
-			std::cout << ls::getTile(Vector2f{ x, y });
+			std::cout << ls::getTile({ x, y });
 		}
 		std::cout << endl;
 	}
