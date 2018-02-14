@@ -17,7 +17,7 @@ bool validmove(Vector2f pos) {
 }
 
 void Load() {
-	ls::loadLevelFile("res/maze_2.txt");
+	ls::loadLevelFile("res/maze_levels/maze_2.txt");
 
 	// Print the level to the console
 	for (size_t y = 0; y < ls::getHeight(); ++y) {
