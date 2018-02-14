@@ -20,14 +20,12 @@ link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 file(GLOB_RECURSE SOURCE_FILES lib_tile_level_loader/*.cpp lib_tile_level_loader/*.h)
 add_library(lib_tile_level_loader STATIC ${SOURCE_FILES})
 target_include_directories(lib_tile_level_loader INTERFACE "${CMAKE_SOURCE_DIR}/lib_tile_level_loader/" PRIVATE ${SFML_INCS})
-target_link_libraries(lib_tile_level_loader sfml-graphics)
+target_link_libraries(lib_tile_level_loader lib_maths sfml-graphics)
 
 ## Maths lib
 add_library(lib_maths INTERFACE)
-target_sources(lib_maths INTERFACE
-	"${CMAKE_SOURCE_DIR}/lib_maths/maths.h")
-target_include_directories(lib_maths INTERFACE
-	"${CMAKE_SOURCE_DIR}/lib_maths" SYSTEM INTERFACE ${SFML_INCS})
+target_sources(lib_maths INTERFACE "${CMAKE_SOURCE_DIR}/lib_maths/maths.h")
+target_include_directories(lib_maths INTERFACE "${CMAKE_SOURCE_DIR}/lib_maths" SYSTEM INTERFACE ${SFML_INCS})
 
 ### Pong - Practical 1 ###
 file(GLOB_RECURSE SOURCES practical_1/*.cpp practical_1/*.h)
@@ -54,3 +52,4 @@ file(GLOB_RECURSE SOURCES practical_3/*.cpp practical_3/*.h)
 add_executable(PRACTICAL_3 ${SOURCES})
 target_include_directories(PRACTICAL_3 PRIVATE ${SFML_INCS})
 target_link_libraries(PRACTICAL_3 lib_tile_level_loader lib_maths sfml-graphics)
+add_dependencies(PRACTICAL_3 copy_resources)

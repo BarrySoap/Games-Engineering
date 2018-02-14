@@ -20,7 +20,7 @@ public:
 	static TILE getTile(sf::Vector2ul);
 	// Get screenspace coordinate of tile
 	static sf::Vector2f getTilePosition(sf::Vector2ul);
-	// Get the tile at screensapce pos
+	// Get the tile at screenspace pos
 	static TILE getTileAt(sf::Vector2f);
 	static size_t getHeight() { return _height; }
 	static size_t getWidth() { return _width; }

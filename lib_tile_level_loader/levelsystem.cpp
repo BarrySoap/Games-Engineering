@@ -106,7 +106,7 @@ void LevelSystem::loadLevelFile(const std::string &path, float tileSize) {
 	buildSprites();
 }
 
-LevelSystem::TILE LevelSystem::getTile(sf::Vector2u p) {
+LevelSystem::TILE LevelSystem::getTile(sf::Vector2ul p) {
 	if (p.x > _width || p.y > _height) {
 		throw string("Tile out of range: ") + to_string(p.x) + "," +
 			to_string(p.y) + ")";
