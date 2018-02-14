@@ -27,7 +27,7 @@ void Load() {
 		std::cout << endl;
 	}
 
-	Vector2f pos(gameWidth / 2, gameHeight / 2);
+	Vector2f pos(150.0f, 150.0f);
 	player->setPosition(pos);
 }
 
