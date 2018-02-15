@@ -18,6 +18,10 @@ bool validmove(Vector2f pos) {
 	return (ls::getTileAt(pos) != ls::WALL);
 }
 
+bool EndGame(Vector2f pos) {
+	return (ls::getTileAt(pos) == ls::END);
+}
+
 void Load() {
 	ls::loadLevelFile("res/maze_levels/maze_2.txt");
 	std::cout << "Level:" << std::endl;
@@ -55,6 +59,10 @@ void Update(RenderWindow &window) {
 
 	if (validmove(player->getPosition()) == false) {
 		std::cout << "in wall" << std::endl;
+	}
+
+	if (EndGame(player->getPosition()) == true) {
+		window.close();
 	}
 }
 
