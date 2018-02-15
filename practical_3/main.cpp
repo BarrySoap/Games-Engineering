@@ -3,12 +3,14 @@
 #include "entity.h"
 #include "levelsystem.h"
 #include <iostream>
+#include <stdlib.h>
 
 using namespace sf;
 using namespace std;
 
 const int gameWidth = 800;					// Screen Width
 const int gameHeight = 600;					// Screen Height
+float accumulator = 0;
 
 Vector2f startPos(150.0f, 150.0f);				// Starting Position
 
@@ -41,6 +43,7 @@ void Update(RenderWindow &window) {
 	// Reset clock, recalculate deltaTime
 	static Clock clock;
 	float dt = clock.restart().asSeconds();
+	accumulator += dt;
 	// Check and consume events
 	Event event;
 	while (window.pollEvent(event)) {
@@ -58,12 +61,18 @@ void Update(RenderWindow &window) {
 	player->update(dt);
 
 	if (validmove(player->getPosition()) == false) {
-		std::cout << "in wall" << std::endl;
+		std::cout << "\r" << "in wall" << std::flush;
 	}
 
 	if (EndGame(player->getPosition()) == true) {
 		window.close();
 	}
+
+	if (Keyboard::isKeyPressed(Keyboard::C)) {
+		system("CLS");
+	}
+
+	std::cout << "\r" << "Elapsed Time: " << accumulator << std::flush;
 }
 
 void Render(RenderWindow &window) {
