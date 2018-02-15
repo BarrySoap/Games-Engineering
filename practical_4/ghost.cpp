@@ -5,24 +5,30 @@ using namespace sf;
 
 int maxIndex = 4;
 int minIndex = 1;
-int randIndex = 1 + (rand() % static_cast<int>(4 - 1 + 1));
+int randIndex = 0;
+static float delay = 20.0f;
 
 void Ghost::update(double dt) {
 	// Move randomly
+	delay -= dt;
+	randIndex = 1 + (rand() % static_cast<int>(4 - 1 + 1));
 
-	switch (randIndex) {
-	case 1:
+	cout << delay << std::endl;
+
+	if (delay <= 5.0f && delay > 0.0f) {
 		Ghost::_position.x -= Ghost::_speed * (float)dt;
-		break;
-	case 2:
+	}
+	else if (delay <= 10.0f && delay > 5.0f) {
 		Ghost::_position.x += Ghost::_speed * (float)dt;
-		break;
-	case 3:
-		Ghost::_position.y -= Ghost::_speed * (float)dt;
-		break;
-	case 4:
+	}
+	else if (delay <= 15.0f && delay > 10.0f) {
 		Ghost::_position.y += Ghost::_speed * (float)dt;
-		break;
+	}
+	else if (delay <= 20.0f && delay > 15.0f) {
+		Ghost::_position.y -= Ghost::_speed * (float)dt;
+	}
+	else {
+		delay = 20.0f;
 	}
 
 	Entity::update(dt);

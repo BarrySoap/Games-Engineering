@@ -21,6 +21,7 @@ void Load() {
 
 	for (int i = 0; i < 4; i++) {
 		Ghost* ghost = new Ghost();
+		ghost->setPosition(Vector2f(i * 200, i * 200));
 		entities.push_back(ghost);
 	}
 }
