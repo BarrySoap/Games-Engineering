@@ -10,6 +10,8 @@ using namespace std;
 const int gameWidth = 800;					// Screen Width
 const int gameHeight = 600;					// Screen Height
 
+Vector2f startPos(150.0f, 150.0f);				// Starting Position
+
 Player* player = new Player();
 
 bool validmove(Vector2f pos) {
@@ -18,6 +20,7 @@ bool validmove(Vector2f pos) {
 
 void Load() {
 	ls::loadLevelFile("res/maze_levels/maze_2.txt");
+	std::cout << "Level:" << std::endl;
 
 	// Print the level to the console
 	for (size_t y = 0; y < ls::getHeight(); ++y) {
@@ -27,8 +30,7 @@ void Load() {
 		std::cout << endl;
 	}
 
-	Vector2f pos(150.0f, 150.0f);
-	player->setPosition(pos);
+	player->setPosition(startPos);
 }
 
 void Update(RenderWindow &window) {
@@ -50,6 +52,10 @@ void Update(RenderWindow &window) {
 	}
 
 	player->update(dt);
+
+	if (validmove(player->getPosition()) == false) {
+		std::cout << "in wall" << std::endl;
+	}
 }
 
 void Render(RenderWindow &window) {

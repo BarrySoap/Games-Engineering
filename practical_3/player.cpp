@@ -29,7 +29,7 @@ void Player::update(double dt) {
 
 	Entity::update(dt);
 
-	std::cout << "\r" << Player::_position.x << "  " << Player::_position.y << std::flush;
+	//std::cout << "\r" << Player::_position.x << "  " << Player::_position.y << std::flush;
 }
 
 Player::Player()
