@@ -10,19 +10,19 @@ using namespace std;
 const int gameWidth = 800;					// Screen Width
 const int gameHeight = 600;					// Screen Height
 
-Player* player = new Player();
-std::vector<Entity *> entities;
+EntityManager em;
 
 void Load() {
 	Vector2f pos(gameWidth / 2, gameHeight / 2);
+	auto player = make_shared<Player>();
 	player->setPosition(pos);
 
-	entities.push_back(player);
+	em.list.push_back(player);
 
 	for (int i = 0; i < 4; i++) {
-		Ghost* ghost = new Ghost();
+		auto ghost = make_shared<Ghost>();
 		ghost->setPosition(Vector2f(i * 200, i * 200));
-		entities.push_back(ghost);
+		em.list.push_back(ghost);
 	}
 }
 
@@ -44,17 +44,11 @@ void Update(RenderWindow &window) {
 		window.close();
 	}
 
-	for (auto &e : entities) {
-		e->update(dt);
-	}
+	em.update(dt);
 }
 
 void Render(RenderWindow &window) {
-	player->render(window);
-
-	for (auto &e : entities) {
-		e->render(window);
-	}
+	em.render(window);
 }
 
 int main() {
