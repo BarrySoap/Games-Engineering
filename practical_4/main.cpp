@@ -21,7 +21,7 @@ void Load() {
 
 	for (int i = 0; i < 4; i++) {
 		auto ghost = make_shared<Ghost>();
-		ghost->setPosition(Vector2f(i * 200, i * 200));
+		ghost->setPosition(Vector2f(i * 200.0f, i * 200.0f));
 		em.list.push_back(ghost);
 	}
 }
