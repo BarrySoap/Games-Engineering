@@ -3,6 +3,7 @@
 #include "player.h"
 #include "ghost.h"
 #include "entity.h"
+#include "system_renderer.h"
 
 using namespace sf;
 using namespace std;
@@ -49,6 +50,8 @@ void Update(RenderWindow &window) {
 
 void Render(RenderWindow &window) {
 	em.render(window);
+
+	// Renderer::queue(&text);
 }
 
 int main() {
