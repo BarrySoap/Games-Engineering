@@ -1,3 +1,5 @@
+#include "entity.h"
+
 class Scene {
 public:
 	Scene() = default;

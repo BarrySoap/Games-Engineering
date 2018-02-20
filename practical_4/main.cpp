@@ -51,7 +51,7 @@ void Update(RenderWindow &window) {
 void Render(RenderWindow &window) {
 	em.render(window);
 
-	// Renderer::queue(&text);
+	// Renderer::queue(&text)
 }
 
 int main() {
