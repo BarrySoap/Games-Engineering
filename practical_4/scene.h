@@ -6,7 +6,7 @@ public:
 	
 	virtual ~Scene() = default;
 	virtual void update(double dt);
-	virtual void render();
+	virtual void render(RenderWindow &window);
 	virtual void load() = 0;
 	std::vector<std::shared_ptr<Entity>> &getEnts();
 	

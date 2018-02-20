@@ -11,20 +11,8 @@ using namespace std;
 const int gameWidth = 800;					// Screen Width
 const int gameHeight = 600;					// Screen Height
 
-EntityManager em;
-
 void Load() {
-	Vector2f pos(gameWidth / 2, gameHeight / 2);
-	auto player = make_shared<Player>();
-	player->setPosition(pos);
-
-	em.list.push_back(player);
-
-	for (int i = 0; i < 4; i++) {
-		auto ghost = make_shared<Ghost>();
-		ghost->setPosition(Vector2f(i * 200.0f, i * 200.0f));
-		em.list.push_back(ghost);
-	}
+	
 }
 
 void Update(RenderWindow &window) {
@@ -44,13 +32,9 @@ void Update(RenderWindow &window) {
 	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
 		window.close();
 	}
-
-	em.update(dt);
 }
 
 void Render(RenderWindow &window) {
-	em.render(window);
-
 	// Renderer::queue(&text)
 }
 

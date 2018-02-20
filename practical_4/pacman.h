@@ -25,6 +25,6 @@ private:
 public:
 	GameScene() = default;
 	void update(double dt) override;
-	void render() override;
+	void render(RenderWindow &window) override;
 	void load() override;
 };
