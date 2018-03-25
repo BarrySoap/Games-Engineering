@@ -1,5 +1,8 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "scene.h"
+
+using namespace sf;
 
 extern std::shared_ptr<Scene> gameScene;
 extern std::shared_ptr<Scene> menuScene;
@@ -12,7 +15,7 @@ private:
 public:
 	MenuScene();
 	void update(double dt) override;
-	void render() override;
+	void render(RenderWindow &window) override;
 	void load() override;
 };
 

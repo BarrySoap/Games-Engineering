@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
+using namespace sf;
+
 class Entity {
 protected:
 	std::unique_ptr<sf::Shape> _shape;
@@ -14,7 +16,7 @@ public:
 	virtual ~Entity() = default;
 
 	virtual void update(const double dt);
-	virtual void render(sf::RenderWindow &window) const = 0;
+	virtual void render(RenderWindow &window) const = 0;
 
 	const sf::Vector2f getPosition();
 	void setPosition(const sf::Vector2f &pos);
@@ -24,5 +26,5 @@ public:
 struct EntityManager {
 	std::vector<std::shared_ptr<Entity>> list;
 	void update(double dt);
-	void render(sf::RenderWindow &window);
+	void render(RenderWindow &window);
 };

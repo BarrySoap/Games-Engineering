@@ -10,7 +10,7 @@ static float delay = 20.0f;
 
 void Ghost::update(double dt) {
 	// Move randomly
-	delay -= dt;
+	delay -= (float)dt;
 	randIndex = 1 + (rand() % static_cast<int>(4 - 1 + 1));
 
 	cout << delay << std::endl;

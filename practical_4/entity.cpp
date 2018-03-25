@@ -1,4 +1,5 @@
 #include "entity.h"
+
 using namespace std;
 using namespace sf;
 

@@ -1,4 +1,7 @@
+#pragma once
 #include "entity.h"
+
+using namespace sf;
 
 class Scene {
 public:
