@@ -11,17 +11,17 @@ void Renderer::initialise(sf::RenderWindow &r) { rw = &r; }
 
 sf::RenderWindow &Renderer::getWindow() { return *rw; }
 
-void Renderer::shutdown() {
+void  Renderer::shutdown() {
 	while (!sprites.empty()) {
 		sprites.pop();
 	}
 }
 
-void Renderer::update(const double &) {}
+void Renderer::update(const float &) {}
 
 void Renderer::render() {
 	if (rw == nullptr) {
-		throw("No render window set!");
+		throw("No render window set.");
 	}
 	while (!sprites.empty()) {
 		rw->draw(*sprites.front());
@@ -30,3 +30,6 @@ void Renderer::render() {
 }
 
 void Renderer::queue(const sf::Drawable *s) { sprites.push(s); }
+
+// Whenever we need to rendere anything we call somehing like
+// Render::queue(&text);

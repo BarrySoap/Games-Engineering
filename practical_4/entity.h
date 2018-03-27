@@ -2,8 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
-
-using namespace sf;
+#include "system_renderer.h"
 
 class Entity {
 protected:
@@ -15,8 +14,8 @@ public:
 	Entity() = delete;
 	virtual ~Entity() = default;
 
-	virtual void update(const double dt);
-	virtual void render(RenderWindow &window) const = 0;
+	virtual void update(const float dt);
+	virtual void render(sf::RenderWindow &window) const = 0;
 
 	const sf::Vector2f getPosition();
 	void setPosition(const sf::Vector2f &pos);
@@ -25,6 +24,6 @@ public:
 
 struct EntityManager {
 	std::vector<std::shared_ptr<Entity>> list;
-	void update(double dt);
-	void render(RenderWindow &window);
+	void update(float dt);
+	void render(sf::RenderWindow &window);
 };

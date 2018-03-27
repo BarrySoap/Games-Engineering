@@ -1,9 +1,10 @@
 #include "player.h"
-#include <iostream>
-using namespace std;
-using namespace sf;
+#include "system_renderer.h"
 
-void Player::update(double dt) {
+using namespace sf;
+using namespace std;
+
+void Player::update(float dt) {
 	// Move in four directions based on keys
 
 	// Move left
@@ -32,12 +33,12 @@ void Player::update(double dt) {
 	//std::cout << "\r" << Player::_position.x << "  " << Player::_position.y << std::flush;
 }
 
-Player::Player()
-	: _speed(200.0f), Entity(make_unique<CircleShape>(25.0f)) {
+Player::Player() : 
+	_speed(200.0f), Entity(make_unique<CircleShape>(25.f)) {
 	_shape->setFillColor(Color::Yellow);
-	_shape->setOrigin(Vector2f(25.0f, 25.0f));
+	_shape->setOrigin(Vector2f(25.f, 25.f));
 }
 
 void Player::render(sf::RenderWindow &window) const {
-	window.draw(*_shape);
+	Renderer::queue(_shape.get());
 }

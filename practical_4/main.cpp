@@ -1,34 +1,31 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "player.h"
-#include "ghost.h"
+#include "pacman.h"
 #include "entity.h"
 #include "system_renderer.h"
-#include "pacman.h"
 #include "scene.h"
 
 using namespace sf;
 using namespace std;
-
-const int gameWidth = 800;					// Screen Width
-const int gameHeight = 600;					// Screen Height
 
 std::shared_ptr<Scene> gameScene;
 std::shared_ptr<Scene> menuScene;
 std::shared_ptr<Scene> activeScene;
 
 void Load() {
-	gameScene = make_shared<GameScene>();
-	menuScene = make_shared<MenuScene>();
+	gameScene.reset(new GameScene());
+	menuScene.reset(new MenuScene());
 	gameScene->load();
 	menuScene->load();
+
 	activeScene = menuScene;
 }
 
 void Update(RenderWindow &window) {
-	// Reset clock, recalculate deltaTime
+	// Reset clock, recalculate deltatime
 	static Clock clock;
 	float dt = clock.restart().asSeconds();
+	activeScene->update(dt);
 	// Check and consume events
 	Event event;
 	while (window.pollEvent(event)) {
@@ -37,22 +34,21 @@ void Update(RenderWindow &window) {
 			return;
 		}
 	}
-
-	// Quit via ESC key
+	// Quit via ESC Key
 	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
 		window.close();
 	}
+
 }
 
 void Render(RenderWindow &window) {
-	activeScene->render(window);
+	activeScene->render();
 	Renderer::render();
 }
 
 int main() {
 	RenderWindow window(VideoMode(gameWidth, gameHeight), "Pac-Man");
 	Renderer::initialise(window);
-
 	Load();
 	while (window.isOpen()) {
 		window.clear();
