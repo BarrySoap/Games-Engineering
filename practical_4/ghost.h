@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "entity.h"
 
@@ -10,4 +10,4 @@ public:
 	void update(float dt) override;
 	Ghost();
 	void render(sf::RenderWindow &window) const override;
-};
+};*/

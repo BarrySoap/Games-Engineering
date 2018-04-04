@@ -2,6 +2,10 @@
 #include "entity.h"
 #include "player.h"
 #include "ghost.h"
+#include "ecm.h"
+#include "cmp_sprite.h"
+
+#define GHOST_COUNT 4
 
 using namespace std;
 using namespace sf;
@@ -40,15 +44,28 @@ void GameScene::render() {
 void GameScene::respawn() {}
 
 void GameScene::load() {
+	auto p1 = make_shared<Entity>();
 
-	shared_ptr<Entity> player = make_shared<Player>();
-	_ents.list.push_back(player);
-	player->setPosition({ 30.0f, 30.0f });
+	auto s = p1->addComponent<ShapeComponent>();
+	s->setShape<sf::CircleShape>(12.0f);
+	s->getShape().setFillColor(Color::Yellow);
+	s->getShape().setOrigin({ 12.0f, 12.0f });
 
-	for (int i = 0; i < 4; i++) {
-		shared_ptr<Entity> ghost = make_shared<Ghost>();
+	_ents.list.push_back(p1);
+
+	const sf::Color ghost_cols[]{ {208, 62, 25},		// Blinky
+								  {219, 133, 28},		// Clyde
+								  {70, 191, 238},		// Inky
+								  {234, 130, 229} };	// Pinky
+
+	for (int i = 0; i < GHOST_COUNT; ++i) {
+		auto ghost = make_shared<Entity>();
+		auto s = ghost->addComponent<ShapeComponent>();
+		s->setShape<sf::CircleShape>(12.0f);
+		s->getShape().setFillColor(ghost_cols[i % 4]);
+		s->getShape().setOrigin({ 12.0f, 12.0f });
+
+		ghost->setPosition({ 20.0f, 20.0f });
 		_ents.list.push_back(ghost);
-		ghost->setPosition({ 50.0f * i, 50.0f * i });
 	}
-
 }

@@ -10,13 +10,13 @@ public:
 	ShapeComponent() = delete;
 	explicit ShapeComponent(Entity *p);
 
-	void update(double dt) override;
+	void update(float dt) override;
 	void render() override;
 
 	sf::Shape &getShape() const;
 
 	template <typename T, typename... Targs>
 	void setShape(Targs... params) {
-		_shape.reset(new T(params));
+		_shape.reset(new T(params...));
 	}
 };

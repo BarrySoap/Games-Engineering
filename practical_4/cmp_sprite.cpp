@@ -8,7 +8,7 @@ using namespace sf;
 //	_sprite->setPosition(_parent->getPosition());
 //}
 
-void ShapeComponent::update(double dt) {
+void ShapeComponent::update(float dt) {
 	_shape->setPosition(_parent->getPosition());
 }
 
