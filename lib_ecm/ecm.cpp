@@ -13,6 +13,12 @@ void Entity::setPosition(const Vector2f &pos) { _position = pos; }
 
 void Entity::update(const float dt) {
 	for (auto c : _components) {
+		c->update(dt);
+	}
+}
+
+void Entity::render() {
+	for (auto c : _components) {
 		c->render();
 	}
 }
@@ -28,7 +34,5 @@ void EntityManager::render() {
 		e->render();
 	}
 }
-
-void Entity::render() {}
 
 Component::Component(Entity * const p) : _parent(p) {}

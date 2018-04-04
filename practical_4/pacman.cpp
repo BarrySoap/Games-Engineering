@@ -4,6 +4,8 @@
 #include "ghost.h"
 #include "ecm.h"
 #include "cmp_sprite.h"
+#include "cmp_actor_movement.h"
+#include "cmp_player_movement.h"
 
 #define GHOST_COUNT 4
 
@@ -50,6 +52,8 @@ void GameScene::load() {
 	s->setShape<sf::CircleShape>(12.0f);
 	s->getShape().setFillColor(Color::Yellow);
 	s->getShape().setOrigin({ 12.0f, 12.0f });
+
+	p1->addComponent<PlayerMovementComponent>();
 
 	_ents.list.push_back(p1);
 
